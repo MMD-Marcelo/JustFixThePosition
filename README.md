@@ -1,6 +1,10 @@
-# JUST fix the position
-
-![JUST fix the position](logo.png)
+<table>
+  <tr>
+    <td bgcolor="#ffffff">
+      <img src="logo.png" alt="JUST fix the position" width="520">
+    </td>
+  </tr>
+</table>
 
 A visual editor for stopping the endless "move it a little to the left", "make it higher", "almost right" loop with AI-generated interfaces.
 
@@ -199,4 +203,3 @@ tests/
 This is still evolving, but the core idea is already usable: create a visual layout and export a JSON file detailed enough for an LLM to rebuild the interface with much less guessing.
 
 The next most important work is improving the exported JSON and the public examples.
-
