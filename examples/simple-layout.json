@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "app": "just-fix-the-position",
+  "_instructions_for_llm": "Use este JSON como especificação visual do JUST fix the position. Respeite coordenadas, layers, assets, tracking e interações.",
+  "llm_brief": {
+    "goal": "Recriar esta interface com fidelidade visual usando os elementos, posições, camadas, assets, estados, interações e timeline deste JSON.",
+    "project_name": "Example",
+    "export_mode": "screen",
+    "target_profile": "react",
+    "implementation_priority": [
+      "Preserve position.x/y, size.width/height, bounds, rotation, opacity and layer_order before making aesthetic guesses.",
+      "Use semantic_role and component_name to choose real UI tags/components, but keep explicit coordinates as the source of truth.",
+      "Use tracking.layout and tracking.raw when there is any doubt about exact values."
+    ],
+    "coordinate_system": {
+      "origin": "top-left",
+      "unit": "px",
+      "canvas_width": 1920,
+      "canvas_height": 1080,
+      "total_height": 1080,
+      "z_order": "Higher layer_order should render above lower layer_order."
+    },
+    "screen_summary": "desktop canvas 1920x1080. 1 visible element. Main roles/types: heading.",
+    "visual_hierarchy": [
+      {
+        "level": 1,
+        "id": "e1",
+        "name": "Título",
+        "role": "heading",
+        "component": "HeroTitle",
+        "reason": "High semantic priority: heading.",
+        "bounds": { "left": 120, "top": 96, "right": 740, "bottom": 184, "center_x": 430, "center_y": 140 },
+        "layer_order": 100
+      }
+    ],
+    "component_plan": [],
+    "interaction_summary": [],
+    "timeline_summary": [{ "instruction": "No timeline is active; render the static layout." }],
+    "ambiguities": [],
+    "final_instruction": "Return an implementation that follows this JSON as a visual contract. Prefer faithful layout over creative redesign."
+  },
+  "exported_at": "2026-07-24T00:00:00.000Z",
+  "export": { "type": "screen", "name": "Example", "profile": "react", "interface_language": "pt" },
+  "canvas": {
+    "type": "desktop",
+    "width": 1920,
+    "height": 1080,
+    "total_height": 1080,
+    "screens": [{ "name": "Tela 1", "type": "page", "height": 1080 }],
+    "guides": { "h": [], "v": [] },
+    "color_vars": [
+      { "name": "brand-red", "value": "#ff3033" },
+      { "name": "charcoal", "value": "#111719" }
+    ]
+  },
+  "assets": [],
+  "elements": [
+    {
+      "id": "e1",
+      "name": "Título",
+      "type": "text",
+      "semantic_role": "heading",
+      "component_name": "HeroTitle",
+      "position": { "x": 120, "y": 96, "x_pct": 6.25, "y_pct": 8.89 },
+      "size": { "width": 620, "height": 88, "w_pct": 32.29, "h_pct": 8.15 },
+      "bounds": { "left": 120, "top": 96, "right": 740, "bottom": 184, "center_x": 430, "center_y": 140 },
+      "rotation": 0,
+      "layer_order": 100,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "constraints": { "x": "left", "y": "top" },
+      "states": { "normal": true, "hover": false, "active": false, "disabled": false },
+      "description": "Título principal da tela.",
+      "comments": [],
+      "text": {
+        "content": "JUST fix the position",
+        "font_family": "system-ui",
+        "font_size": 48,
+        "font_weight": "800",
+        "font_color": "#111719",
+        "text_align": "left"
+      },
+      "tracking": {
+        "identity": { "id": "e1", "name": "Título", "type": "text", "semantic_role": "heading", "component_name": "HeroTitle" },
+        "layout": {
+          "position": { "x": 120, "y": 96, "x_pct": 6.25, "y_pct": 8.89 },
+          "size": { "width": 620, "height": 88, "w_pct": 32.29, "h_pct": 8.15 },
+          "bounds": { "left": 120, "top": 96, "right": 740, "bottom": 184, "center_x": 430, "center_y": 140 },
+          "rotation": 0,
+          "layer_order": 100,
+          "constraints": { "x": "left", "y": "top" }
+        }
+      }
+    }
+  ],
+  "interactions": [],
+  "components": [],
+  "timeline": { "active": false },
+  "warnings": []
+}

@@ -1,0 +1,734 @@
+{
+  "schema_version": "1.0",
+  "app": "just-fix-the-position",
+  "_instructions_for_llm": "Use this JSON as a visual contract. PNG assets are region-level screenshots captured from HTML/CSS mockups; rebuild them as real UI while preserving coordinates, size, layer order and semantic roles.",
+  "llm_brief": {
+    "goal": "Recreate the Dashboard template with faithful layout and real UI components.",
+    "project_name": "JUST Dashboard template",
+    "export_mode": "screen",
+    "target_profile": "react",
+    "implementation_priority": [
+      "Preserve coordinates, bounds, sizes and layer_order.",
+      "Use PNG assets as visual references, not as the only implementation when real UI is possible.",
+      "Respect semantic_role and component_name for component structure."
+    ],
+    "coordinate_system": {
+      "origin": "top-left",
+      "unit": "px",
+      "canvas_width": 1920,
+      "canvas_height": 1080,
+      "total_height": 1080,
+      "z_order": "Higher layer_order renders above lower layer_order."
+    },
+    "screen_summary": "Dashboard template, 1920x1080, 6 visual regions.",
+    "asset_instructions": [
+      {
+        "id": "dashboard-asset-1",
+        "file": "templates/dashboard/assets/sidebar.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "dashboard-asset-2",
+        "file": "templates/dashboard/assets/topbar.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "dashboard-asset-3",
+        "file": "templates/dashboard/assets/kpi-row.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "dashboard-asset-4",
+        "file": "templates/dashboard/assets/chart-panel.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "dashboard-asset-5",
+        "file": "templates/dashboard/assets/table-panel.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "dashboard-asset-6",
+        "file": "templates/dashboard/assets/activity-panel.png",
+        "usage": "visual reference"
+      }
+    ],
+    "timeline_summary": [
+      {
+        "instruction": "Static template. No animation timeline is required."
+      }
+    ],
+    "final_instruction": "Return production-quality responsive code that follows this JSON as the visual contract."
+  },
+  "exported_at": "2026-07-25T00:00:00.000Z",
+  "export": {
+    "type": "screen",
+    "name": "JUST Dashboard template",
+    "profile": "react",
+    "interface_language": "en"
+  },
+  "canvas": {
+    "type": "desktop",
+    "width": 1920,
+    "height": 1080,
+    "total_height": 1080,
+    "screens": [
+      {
+        "id": "screen-1",
+        "name": "Dashboard",
+        "type": "page",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "guides": {
+      "h": [],
+      "v": []
+    },
+    "color_vars": [
+      {
+        "name": "brand-red",
+        "value": "#ff3033"
+      },
+      {
+        "name": "ink",
+        "value": "#111517"
+      },
+      {
+        "name": "page-bg",
+        "value": "#f4f6f6"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "id": "dashboard-asset-1",
+      "file": "templates/dashboard/assets/sidebar.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "dashboard-asset-2",
+      "file": "templates/dashboard/assets/topbar.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "dashboard-asset-3",
+      "file": "templates/dashboard/assets/kpi-row.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "dashboard-asset-4",
+      "file": "templates/dashboard/assets/chart-panel.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "dashboard-asset-5",
+      "file": "templates/dashboard/assets/table-panel.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "dashboard-asset-6",
+      "file": "templates/dashboard/assets/activity-panel.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    }
+  ],
+  "elements": [
+    {
+      "id": "dashboard-bg",
+      "name": "Dashboard background",
+      "type": "shape",
+      "semantic_role": "background",
+      "component_name": "TemplateBackground",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "x_pct": 0,
+        "y_pct": 0
+      },
+      "size": {
+        "width": 1920,
+        "height": 1080,
+        "w_pct": 100,
+        "h_pct": 100
+      },
+      "bounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1920,
+        "bottom": 1080,
+        "center_x": 960,
+        "center_y": 540
+      },
+      "constraints": {
+        "x": "left",
+        "y": "top"
+      },
+      "states": {
+        "normal": true
+      },
+      "rotation": 0,
+      "layer_order": 1,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Template background color.",
+      "shape": {
+        "variant": "background",
+        "style": {
+          "background": "#f4f6f6",
+          "border": "0"
+        }
+      },
+      "tracking": {
+        "identity": {
+          "id": "dashboard-bg",
+          "semantic_role": "background"
+        },
+        "layout": {
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "size": {
+            "width": 1920,
+            "height": 1080
+          },
+          "layer_order": 1
+        }
+      }
+    },
+    {
+      "id": "dashboard-sidebar",
+      "name": "Dashboard sidebar",
+      "type": "image",
+      "asset_id": "dashboard-asset-1",
+      "file": "templates/dashboard/assets/sidebar.png",
+      "semantic_role": "navigation",
+      "component_name": "DashboardSidebar",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "x_pct": 0,
+        "y_pct": 0
+      },
+      "size": {
+        "width": 280,
+        "height": 1080,
+        "w_pct": 14.58,
+        "h_pct": 100
+      },
+      "bounds": {
+        "left": 0,
+        "top": 0,
+        "right": 280,
+        "bottom": 1080,
+        "center_x": 140,
+        "center_y": 540
+      },
+      "constraints": {
+        "x": "left",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 100,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Primary dashboard navigation.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "dashboard-sidebar",
+          "name": "Dashboard sidebar",
+          "type": "image",
+          "semantic_role": "navigation",
+          "component_name": "DashboardSidebar"
+        },
+        "layout": {
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "size": {
+            "width": 280,
+            "height": 1080
+          },
+          "bounds": {
+            "left": 0,
+            "top": 0,
+            "right": 280,
+            "bottom": 1080,
+            "center_x": 140,
+            "center_y": 540
+          },
+          "layer_order": 100
+        },
+        "content": {
+          "asset_id": "dashboard-asset-1",
+          "file": "templates/dashboard/assets/sidebar.png",
+          "description": "Primary dashboard navigation."
+        }
+      }
+    },
+    {
+      "id": "dashboard-topbar",
+      "name": "Dashboard topbar",
+      "type": "image",
+      "asset_id": "dashboard-asset-2",
+      "file": "templates/dashboard/assets/topbar.png",
+      "semantic_role": "header",
+      "component_name": "DashboardTopbar",
+      "position": {
+        "x": 320,
+        "y": 36,
+        "x_pct": 16.67,
+        "y_pct": 3.33
+      },
+      "size": {
+        "width": 1480,
+        "height": 72,
+        "w_pct": 77.08,
+        "h_pct": 6.67
+      },
+      "bounds": {
+        "left": 320,
+        "top": 36,
+        "right": 1800,
+        "bottom": 108,
+        "center_x": 1060,
+        "center_y": 72
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 101,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Dashboard title and search area.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "dashboard-topbar",
+          "name": "Dashboard topbar",
+          "type": "image",
+          "semantic_role": "header",
+          "component_name": "DashboardTopbar"
+        },
+        "layout": {
+          "position": {
+            "x": 320,
+            "y": 36
+          },
+          "size": {
+            "width": 1480,
+            "height": 72
+          },
+          "bounds": {
+            "left": 320,
+            "top": 36,
+            "right": 1800,
+            "bottom": 108,
+            "center_x": 1060,
+            "center_y": 72
+          },
+          "layer_order": 101
+        },
+        "content": {
+          "asset_id": "dashboard-asset-2",
+          "file": "templates/dashboard/assets/topbar.png",
+          "description": "Dashboard title and search area."
+        }
+      }
+    },
+    {
+      "id": "dashboard-kpi-row",
+      "name": "KPI row",
+      "type": "image",
+      "asset_id": "dashboard-asset-3",
+      "file": "templates/dashboard/assets/kpi-row.png",
+      "semantic_role": "metrics",
+      "component_name": "KpiRow",
+      "position": {
+        "x": 320,
+        "y": 148,
+        "x_pct": 16.67,
+        "y_pct": 13.7
+      },
+      "size": {
+        "width": 1480,
+        "height": 150,
+        "w_pct": 77.08,
+        "h_pct": 13.89
+      },
+      "bounds": {
+        "left": 320,
+        "top": 148,
+        "right": 1800,
+        "bottom": 298,
+        "center_x": 1060,
+        "center_y": 223
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 102,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Four KPI cards.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "dashboard-kpi-row",
+          "name": "KPI row",
+          "type": "image",
+          "semantic_role": "metrics",
+          "component_name": "KpiRow"
+        },
+        "layout": {
+          "position": {
+            "x": 320,
+            "y": 148
+          },
+          "size": {
+            "width": 1480,
+            "height": 150
+          },
+          "bounds": {
+            "left": 320,
+            "top": 148,
+            "right": 1800,
+            "bottom": 298,
+            "center_x": 1060,
+            "center_y": 223
+          },
+          "layer_order": 102
+        },
+        "content": {
+          "asset_id": "dashboard-asset-3",
+          "file": "templates/dashboard/assets/kpi-row.png",
+          "description": "Four KPI cards."
+        }
+      }
+    },
+    {
+      "id": "dashboard-chart-panel",
+      "name": "Chart panel",
+      "type": "image",
+      "asset_id": "dashboard-asset-4",
+      "file": "templates/dashboard/assets/chart-panel.png",
+      "semantic_role": "chart",
+      "component_name": "ChartPanel",
+      "position": {
+        "x": 320,
+        "y": 338,
+        "x_pct": 16.67,
+        "y_pct": 31.3
+      },
+      "size": {
+        "width": 900,
+        "height": 470,
+        "w_pct": 46.88,
+        "h_pct": 43.52
+      },
+      "bounds": {
+        "left": 320,
+        "top": 338,
+        "right": 1220,
+        "bottom": 808,
+        "center_x": 770,
+        "center_y": 573
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 103,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Main analytics chart panel.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "dashboard-chart-panel",
+          "name": "Chart panel",
+          "type": "image",
+          "semantic_role": "chart",
+          "component_name": "ChartPanel"
+        },
+        "layout": {
+          "position": {
+            "x": 320,
+            "y": 338
+          },
+          "size": {
+            "width": 900,
+            "height": 470
+          },
+          "bounds": {
+            "left": 320,
+            "top": 338,
+            "right": 1220,
+            "bottom": 808,
+            "center_x": 770,
+            "center_y": 573
+          },
+          "layer_order": 103
+        },
+        "content": {
+          "asset_id": "dashboard-asset-4",
+          "file": "templates/dashboard/assets/chart-panel.png",
+          "description": "Main analytics chart panel."
+        }
+      }
+    },
+    {
+      "id": "dashboard-table-panel",
+      "name": "Projects table",
+      "type": "image",
+      "asset_id": "dashboard-asset-5",
+      "file": "templates/dashboard/assets/table-panel.png",
+      "semantic_role": "table",
+      "component_name": "ProjectsTable",
+      "position": {
+        "x": 1260,
+        "y": 338,
+        "x_pct": 65.63,
+        "y_pct": 31.3
+      },
+      "size": {
+        "width": 540,
+        "height": 470,
+        "w_pct": 28.13,
+        "h_pct": 43.52
+      },
+      "bounds": {
+        "left": 1260,
+        "top": 338,
+        "right": 1800,
+        "bottom": 808,
+        "center_x": 1530,
+        "center_y": 573
+      },
+      "constraints": {
+        "x": "right",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 104,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Recent projects table.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "dashboard-table-panel",
+          "name": "Projects table",
+          "type": "image",
+          "semantic_role": "table",
+          "component_name": "ProjectsTable"
+        },
+        "layout": {
+          "position": {
+            "x": 1260,
+            "y": 338
+          },
+          "size": {
+            "width": 540,
+            "height": 470
+          },
+          "bounds": {
+            "left": 1260,
+            "top": 338,
+            "right": 1800,
+            "bottom": 808,
+            "center_x": 1530,
+            "center_y": 573
+          },
+          "layer_order": 104
+        },
+        "content": {
+          "asset_id": "dashboard-asset-5",
+          "file": "templates/dashboard/assets/table-panel.png",
+          "description": "Recent projects table."
+        }
+      }
+    },
+    {
+      "id": "dashboard-activity-panel",
+      "name": "Activity panel",
+      "type": "image",
+      "asset_id": "dashboard-asset-6",
+      "file": "templates/dashboard/assets/activity-panel.png",
+      "semantic_role": "status",
+      "component_name": "ValidationPanel",
+      "position": {
+        "x": 320,
+        "y": 846,
+        "x_pct": 16.67,
+        "y_pct": 78.33
+      },
+      "size": {
+        "width": 1480,
+        "height": 150,
+        "w_pct": 77.08,
+        "h_pct": 13.89
+      },
+      "bounds": {
+        "left": 320,
+        "top": 846,
+        "right": 1800,
+        "bottom": 996,
+        "center_x": 1060,
+        "center_y": 921
+      },
+      "constraints": {
+        "x": "center",
+        "y": "bottom"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 105,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Schema validation status panel.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "dashboard-activity-panel",
+          "name": "Activity panel",
+          "type": "image",
+          "semantic_role": "status",
+          "component_name": "ValidationPanel"
+        },
+        "layout": {
+          "position": {
+            "x": 320,
+            "y": 846
+          },
+          "size": {
+            "width": 1480,
+            "height": 150
+          },
+          "bounds": {
+            "left": 320,
+            "top": 846,
+            "right": 1800,
+            "bottom": 996,
+            "center_x": 1060,
+            "center_y": 921
+          },
+          "layer_order": 105
+        },
+        "content": {
+          "asset_id": "dashboard-asset-6",
+          "file": "templates/dashboard/assets/activity-panel.png",
+          "description": "Schema validation status panel."
+        }
+      }
+    }
+  ],
+  "interactions": [],
+  "components": [],
+  "timeline": {
+    "active": false,
+    "total_frames": 0,
+    "fps": 24,
+    "duration_seconds": 0,
+    "loop": false,
+    "auto_keyframe": false
+  },
+  "warnings": []
+}

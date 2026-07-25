@@ -1,0 +1,734 @@
+{
+  "schema_version": "1.0",
+  "app": "just-fix-the-position",
+  "_instructions_for_llm": "Use this JSON as a visual contract. PNG assets are region-level screenshots captured from HTML/CSS mockups; rebuild them as real UI while preserving coordinates, size, layer order and semantic roles.",
+  "llm_brief": {
+    "goal": "Recreate the Desktop app template with faithful layout and real UI components.",
+    "project_name": "JUST Desktop app template",
+    "export_mode": "screen",
+    "target_profile": "react",
+    "implementation_priority": [
+      "Preserve coordinates, bounds, sizes and layer_order.",
+      "Use PNG assets as visual references, not as the only implementation when real UI is possible.",
+      "Respect semantic_role and component_name for component structure."
+    ],
+    "coordinate_system": {
+      "origin": "top-left",
+      "unit": "px",
+      "canvas_width": 1920,
+      "canvas_height": 1080,
+      "total_height": 1080,
+      "z_order": "Higher layer_order renders above lower layer_order."
+    },
+    "screen_summary": "Desktop app template, 1920x1080, 6 visual regions.",
+    "asset_instructions": [
+      {
+        "id": "desktop-app-asset-1",
+        "file": "templates/desktop-app/assets/topbar.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "desktop-app-asset-2",
+        "file": "templates/desktop-app/assets/tool-rail.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "desktop-app-asset-3",
+        "file": "templates/desktop-app/assets/sidebar.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "desktop-app-asset-4",
+        "file": "templates/desktop-app/assets/canvas-panel.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "desktop-app-asset-5",
+        "file": "templates/desktop-app/assets/inspector.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "desktop-app-asset-6",
+        "file": "templates/desktop-app/assets/timeline.png",
+        "usage": "visual reference"
+      }
+    ],
+    "timeline_summary": [
+      {
+        "instruction": "Static template. No animation timeline is required."
+      }
+    ],
+    "final_instruction": "Return production-quality responsive code that follows this JSON as the visual contract."
+  },
+  "exported_at": "2026-07-25T00:00:00.000Z",
+  "export": {
+    "type": "screen",
+    "name": "JUST Desktop app template",
+    "profile": "react",
+    "interface_language": "en"
+  },
+  "canvas": {
+    "type": "desktop",
+    "width": 1920,
+    "height": 1080,
+    "total_height": 1080,
+    "screens": [
+      {
+        "id": "screen-1",
+        "name": "Desktop app",
+        "type": "page",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "guides": {
+      "h": [],
+      "v": []
+    },
+    "color_vars": [
+      {
+        "name": "brand-red",
+        "value": "#ff3033"
+      },
+      {
+        "name": "ink",
+        "value": "#111517"
+      },
+      {
+        "name": "page-bg",
+        "value": "#f4f6f6"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "id": "desktop-app-asset-1",
+      "file": "templates/desktop-app/assets/topbar.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "desktop-app-asset-2",
+      "file": "templates/desktop-app/assets/tool-rail.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "desktop-app-asset-3",
+      "file": "templates/desktop-app/assets/sidebar.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "desktop-app-asset-4",
+      "file": "templates/desktop-app/assets/canvas-panel.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "desktop-app-asset-5",
+      "file": "templates/desktop-app/assets/inspector.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "desktop-app-asset-6",
+      "file": "templates/desktop-app/assets/timeline.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    }
+  ],
+  "elements": [
+    {
+      "id": "desktop-app-bg",
+      "name": "Desktop app background",
+      "type": "shape",
+      "semantic_role": "background",
+      "component_name": "TemplateBackground",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "x_pct": 0,
+        "y_pct": 0
+      },
+      "size": {
+        "width": 1920,
+        "height": 1080,
+        "w_pct": 100,
+        "h_pct": 100
+      },
+      "bounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1920,
+        "bottom": 1080,
+        "center_x": 960,
+        "center_y": 540
+      },
+      "constraints": {
+        "x": "left",
+        "y": "top"
+      },
+      "states": {
+        "normal": true
+      },
+      "rotation": 0,
+      "layer_order": 1,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Template background color.",
+      "shape": {
+        "variant": "background",
+        "style": {
+          "background": "#f4f6f6",
+          "border": "0"
+        }
+      },
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-bg",
+          "semantic_role": "background"
+        },
+        "layout": {
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "size": {
+            "width": 1920,
+            "height": 1080
+          },
+          "layer_order": 1
+        }
+      }
+    },
+    {
+      "id": "desktop-app-topbar",
+      "name": "Application topbar",
+      "type": "image",
+      "asset_id": "desktop-app-asset-1",
+      "file": "templates/desktop-app/assets/topbar.png",
+      "semantic_role": "application-toolbar",
+      "component_name": "AppTopbar",
+      "position": {
+        "x": 100,
+        "y": 34,
+        "x_pct": 5.21,
+        "y_pct": 3.15
+      },
+      "size": {
+        "width": 1720,
+        "height": 72,
+        "w_pct": 89.58,
+        "h_pct": 6.67
+      },
+      "bounds": {
+        "left": 100,
+        "top": 34,
+        "right": 1820,
+        "bottom": 106,
+        "center_x": 960,
+        "center_y": 70
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 100,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Main app toolbar with logo, menu commands and export actions.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-topbar",
+          "name": "Application topbar",
+          "type": "image",
+          "semantic_role": "application-toolbar",
+          "component_name": "AppTopbar"
+        },
+        "layout": {
+          "position": {
+            "x": 100,
+            "y": 34
+          },
+          "size": {
+            "width": 1720,
+            "height": 72
+          },
+          "bounds": {
+            "left": 100,
+            "top": 34,
+            "right": 1820,
+            "bottom": 106,
+            "center_x": 960,
+            "center_y": 70
+          },
+          "layer_order": 100
+        },
+        "content": {
+          "asset_id": "desktop-app-asset-1",
+          "file": "templates/desktop-app/assets/topbar.png",
+          "description": "Main app toolbar with logo, menu commands and export actions."
+        }
+      }
+    },
+    {
+      "id": "desktop-app-tool-rail",
+      "name": "Tool rail",
+      "type": "image",
+      "asset_id": "desktop-app-asset-2",
+      "file": "templates/desktop-app/assets/tool-rail.png",
+      "semantic_role": "tool-palette",
+      "component_name": "ToolRail",
+      "position": {
+        "x": 40,
+        "y": 110,
+        "x_pct": 2.08,
+        "y_pct": 10.19
+      },
+      "size": {
+        "width": 72,
+        "height": 900,
+        "w_pct": 3.75,
+        "h_pct": 83.33
+      },
+      "bounds": {
+        "left": 40,
+        "top": 110,
+        "right": 112,
+        "bottom": 1010,
+        "center_x": 76,
+        "center_y": 560
+      },
+      "constraints": {
+        "x": "left",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 101,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Vertical Photoshop-style tool rail.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-tool-rail",
+          "name": "Tool rail",
+          "type": "image",
+          "semantic_role": "tool-palette",
+          "component_name": "ToolRail"
+        },
+        "layout": {
+          "position": {
+            "x": 40,
+            "y": 110
+          },
+          "size": {
+            "width": 72,
+            "height": 900
+          },
+          "bounds": {
+            "left": 40,
+            "top": 110,
+            "right": 112,
+            "bottom": 1010,
+            "center_x": 76,
+            "center_y": 560
+          },
+          "layer_order": 101
+        },
+        "content": {
+          "asset_id": "desktop-app-asset-2",
+          "file": "templates/desktop-app/assets/tool-rail.png",
+          "description": "Vertical Photoshop-style tool rail."
+        }
+      }
+    },
+    {
+      "id": "desktop-app-sidebar",
+      "name": "Project sidebar",
+      "type": "image",
+      "asset_id": "desktop-app-asset-3",
+      "file": "templates/desktop-app/assets/sidebar.png",
+      "semantic_role": "navigation-panel",
+      "component_name": "ProjectSidebar",
+      "position": {
+        "x": 130,
+        "y": 110,
+        "x_pct": 6.77,
+        "y_pct": 10.19
+      },
+      "size": {
+        "width": 260,
+        "height": 900,
+        "w_pct": 13.54,
+        "h_pct": 83.33
+      },
+      "bounds": {
+        "left": 130,
+        "top": 110,
+        "right": 390,
+        "bottom": 1010,
+        "center_x": 260,
+        "center_y": 560
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 102,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Screens, layers, assets and components navigation.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-sidebar",
+          "name": "Project sidebar",
+          "type": "image",
+          "semantic_role": "navigation-panel",
+          "component_name": "ProjectSidebar"
+        },
+        "layout": {
+          "position": {
+            "x": 130,
+            "y": 110
+          },
+          "size": {
+            "width": 260,
+            "height": 900
+          },
+          "bounds": {
+            "left": 130,
+            "top": 110,
+            "right": 390,
+            "bottom": 1010,
+            "center_x": 260,
+            "center_y": 560
+          },
+          "layer_order": 102
+        },
+        "content": {
+          "asset_id": "desktop-app-asset-3",
+          "file": "templates/desktop-app/assets/sidebar.png",
+          "description": "Screens, layers, assets and components navigation."
+        }
+      }
+    },
+    {
+      "id": "desktop-app-canvas-panel",
+      "name": "Main canvas panel",
+      "type": "image",
+      "asset_id": "desktop-app-asset-4",
+      "file": "templates/desktop-app/assets/canvas-panel.png",
+      "semantic_role": "workspace",
+      "component_name": "WorkspaceCanvas",
+      "position": {
+        "x": 430,
+        "y": 190,
+        "x_pct": 22.4,
+        "y_pct": 17.59
+      },
+      "size": {
+        "width": 980,
+        "height": 640,
+        "w_pct": 51.04,
+        "h_pct": 59.26
+      },
+      "bounds": {
+        "left": 430,
+        "top": 190,
+        "right": 1410,
+        "bottom": 830,
+        "center_x": 920,
+        "center_y": 510
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 103,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Central canvas/artboard editing area.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-canvas-panel",
+          "name": "Main canvas panel",
+          "type": "image",
+          "semantic_role": "workspace",
+          "component_name": "WorkspaceCanvas"
+        },
+        "layout": {
+          "position": {
+            "x": 430,
+            "y": 190
+          },
+          "size": {
+            "width": 980,
+            "height": 640
+          },
+          "bounds": {
+            "left": 430,
+            "top": 190,
+            "right": 1410,
+            "bottom": 830,
+            "center_x": 920,
+            "center_y": 510
+          },
+          "layer_order": 103
+        },
+        "content": {
+          "asset_id": "desktop-app-asset-4",
+          "file": "templates/desktop-app/assets/canvas-panel.png",
+          "description": "Central canvas/artboard editing area."
+        }
+      }
+    },
+    {
+      "id": "desktop-app-inspector",
+      "name": "Inspector panel",
+      "type": "image",
+      "asset_id": "desktop-app-asset-5",
+      "file": "templates/desktop-app/assets/inspector.png",
+      "semantic_role": "properties-panel",
+      "component_name": "InspectorPanel",
+      "position": {
+        "x": 1460,
+        "y": 190,
+        "x_pct": 76.04,
+        "y_pct": 17.59
+      },
+      "size": {
+        "width": 330,
+        "height": 640,
+        "w_pct": 17.19,
+        "h_pct": 59.26
+      },
+      "bounds": {
+        "left": 1460,
+        "top": 190,
+        "right": 1790,
+        "bottom": 830,
+        "center_x": 1625,
+        "center_y": 510
+      },
+      "constraints": {
+        "x": "right",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 104,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Right panel for layout, visual and AI metadata.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-inspector",
+          "name": "Inspector panel",
+          "type": "image",
+          "semantic_role": "properties-panel",
+          "component_name": "InspectorPanel"
+        },
+        "layout": {
+          "position": {
+            "x": 1460,
+            "y": 190
+          },
+          "size": {
+            "width": 330,
+            "height": 640
+          },
+          "bounds": {
+            "left": 1460,
+            "top": 190,
+            "right": 1790,
+            "bottom": 830,
+            "center_x": 1625,
+            "center_y": 510
+          },
+          "layer_order": 104
+        },
+        "content": {
+          "asset_id": "desktop-app-asset-5",
+          "file": "templates/desktop-app/assets/inspector.png",
+          "description": "Right panel for layout, visual and AI metadata."
+        }
+      }
+    },
+    {
+      "id": "desktop-app-timeline",
+      "name": "Timeline strip",
+      "type": "image",
+      "asset_id": "desktop-app-asset-6",
+      "file": "templates/desktop-app/assets/timeline.png",
+      "semantic_role": "timeline",
+      "component_name": "Timeline",
+      "position": {
+        "x": 430,
+        "y": 860,
+        "x_pct": 22.4,
+        "y_pct": 79.63
+      },
+      "size": {
+        "width": 980,
+        "height": 150,
+        "w_pct": 51.04,
+        "h_pct": 13.89
+      },
+      "bounds": {
+        "left": 430,
+        "top": 860,
+        "right": 1410,
+        "bottom": 1010,
+        "center_x": 920,
+        "center_y": 935
+      },
+      "constraints": {
+        "x": "center",
+        "y": "bottom"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 105,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Timeline strip with frames and keyframes.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "desktop-app-timeline",
+          "name": "Timeline strip",
+          "type": "image",
+          "semantic_role": "timeline",
+          "component_name": "Timeline"
+        },
+        "layout": {
+          "position": {
+            "x": 430,
+            "y": 860
+          },
+          "size": {
+            "width": 980,
+            "height": 150
+          },
+          "bounds": {
+            "left": 430,
+            "top": 860,
+            "right": 1410,
+            "bottom": 1010,
+            "center_x": 920,
+            "center_y": 935
+          },
+          "layer_order": 105
+        },
+        "content": {
+          "asset_id": "desktop-app-asset-6",
+          "file": "templates/desktop-app/assets/timeline.png",
+          "description": "Timeline strip with frames and keyframes."
+        }
+      }
+    }
+  ],
+  "interactions": [],
+  "components": [],
+  "timeline": {
+    "active": false,
+    "total_frames": 0,
+    "fps": 24,
+    "duration_seconds": 0,
+    "loop": false,
+    "auto_keyframe": false
+  },
+  "warnings": []
+}

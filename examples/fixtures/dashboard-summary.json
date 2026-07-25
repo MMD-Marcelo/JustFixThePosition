@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "app": "just-fix-the-position",
+  "_instructions_for_llm": "Use este JSON como contrato visual de dashboard. Preserve densidade, alinhamento, hierarchy e cards.",
+  "llm_brief": {
+    "goal": "Recriar um dashboard desktop com sidebar, KPI cards e tabela.",
+    "project_name": "Dashboard Summary Fixture",
+    "export_mode": "screen",
+    "target_profile": "react",
+    "implementation_priority": [
+      "Keep the dashboard dense and operational, not like a landing page.",
+      "Preserve the sidebar width, card positions, table bounds and layer order.",
+      "Use semantic_role to choose nav, card and table components."
+    ],
+    "coordinate_system": { "origin": "top-left", "unit": "px", "canvas_width": 1280, "canvas_height": 800, "total_height": 800, "z_order": "Higher layer_order renders above lower layer_order." },
+    "screen_summary": "Operational dashboard 1280x800 with left sidebar, header, two KPI cards and a data table.",
+    "layout_rules": [
+      "Do not create a hero section.",
+      "Use compact spacing and clear table rows.",
+      "Sidebar should stay fixed on the left."
+    ],
+    "visual_hierarchy": [
+      { "level": 1, "id": "table", "name": "Accounts Table", "role": "table", "component": "DashboardTable", "bounds": { "left": 280, "top": 280, "right": 1160, "bottom": 700 }, "layer_order": 130 },
+      { "level": 2, "id": "kpi-revenue", "name": "Revenue Card", "role": "card", "component": "KpiGrid", "bounds": { "left": 280, "top": 128, "right": 600, "bottom": 232 }, "layer_order": 120 }
+    ],
+    "component_plan": [
+      { "name": "DashboardSidebar", "source": "component_name", "element_ids": ["sidebar"], "element_names": ["Sidebar"], "suggested_output": "Create a fixed sidebar component." },
+      { "name": "KpiGrid", "source": "component_name", "element_ids": ["kpi-revenue", "kpi-users"], "element_names": ["Revenue Card", "Users Card"], "suggested_output": "Create reusable metric cards." },
+      { "name": "DashboardTable", "source": "component_name", "element_ids": ["table"], "element_names": ["Accounts Table"], "suggested_output": "Create a table component with header and rows." }
+    ],
+    "interaction_summary": [],
+    "timeline_summary": [{ "instruction": "No timeline is active; render the static dashboard." }],
+    "ambiguities": [],
+    "final_instruction": "Return a faithful dashboard implementation with restrained styling and exact layout."
+  },
+  "exported_at": "2026-07-25T00:00:00.000Z",
+  "export": { "type": "screen", "name": "Dashboard Summary Fixture", "profile": "react", "interface_language": "pt" },
+  "canvas": {
+    "type": "desktop",
+    "width": 1280,
+    "height": 800,
+    "total_height": 800,
+    "screens": [{ "name": "Tela 1", "type": "page", "width": 1280, "height": 800 }],
+    "guides": { "h": [96, 256], "v": [240, 280] },
+    "color_vars": [{ "name": "ink", "value": "#111517" }, { "name": "brand-red", "value": "#ff3033" }]
+  },
+  "assets": [],
+  "elements": [
+    { "id": "sidebar", "name": "Sidebar", "type": "shape", "semantic_role": "nav", "component_name": "DashboardSidebar", "position": { "x": 0, "y": 0 }, "size": { "width": 240, "height": 800 }, "bounds": { "left": 0, "top": 0, "right": 240, "bottom": 800, "center_x": 120, "center_y": 400 }, "rotation": 0, "layer_order": 100, "opacity": 1, "visible": true, "locked": false, "constraints": { "x": "left", "y": "stretch" }, "states": { "normal": true }, "text": { "content": "JUST\nDashboard\nAccounts\nReports\nSettings", "font_family": "system-ui", "font_size": 16, "font_weight": "700", "font_color": "#ffffff", "text_align": "left" }, "shape": { "variant": "nav", "style": { "background": "#111517" } } },
+    { "id": "title", "name": "Page Title", "type": "text", "semantic_role": "heading", "component_name": "DashboardHeader", "position": { "x": 280, "y": 48 }, "size": { "width": 500, "height": 48 }, "bounds": { "left": 280, "top": 48, "right": 780, "bottom": 96, "center_x": 530, "center_y": 72 }, "rotation": 0, "layer_order": 110, "opacity": 1, "visible": true, "locked": false, "constraints": { "x": "left", "y": "top" }, "states": { "normal": true }, "text": { "content": "Account overview", "font_family": "system-ui", "font_size": 32, "font_weight": "800", "font_color": "#111517", "text_align": "left" } },
+    { "id": "kpi-revenue", "name": "Revenue Card", "type": "shape", "semantic_role": "card", "component_name": "KpiGrid", "position": { "x": 280, "y": 128 }, "size": { "width": 320, "height": 104 }, "bounds": { "left": 280, "top": 128, "right": 600, "bottom": 232, "center_x": 440, "center_y": 180 }, "rotation": 0, "layer_order": 120, "opacity": 1, "visible": true, "locked": false, "constraints": { "x": "left", "y": "top" }, "states": { "normal": true }, "text": { "content": "Revenue\n$42,900\n+12.4%", "font_family": "system-ui", "font_size": 18, "font_weight": "800", "font_color": "#111517", "text_align": "left" }, "shape": { "variant": "metric", "style": { "background": "#ffffff" } } },
+    { "id": "kpi-users", "name": "Users Card", "type": "shape", "semantic_role": "card", "component_name": "KpiGrid", "position": { "x": 624, "y": 128 }, "size": { "width": 320, "height": 104 }, "bounds": { "left": 624, "top": 128, "right": 944, "bottom": 232, "center_x": 784, "center_y": 180 }, "rotation": 0, "layer_order": 121, "opacity": 1, "visible": true, "locked": false, "constraints": { "x": "left", "y": "top" }, "states": { "normal": true }, "text": { "content": "Active users\n8,410\n+3.2%", "font_family": "system-ui", "font_size": 18, "font_weight": "800", "font_color": "#111517", "text_align": "left" }, "shape": { "variant": "metric", "style": { "background": "#ffffff" } } },
+    { "id": "table", "name": "Accounts Table", "type": "shape", "semantic_role": "table", "component_name": "DashboardTable", "position": { "x": 280, "y": 280 }, "size": { "width": 880, "height": 420 }, "bounds": { "left": 280, "top": 280, "right": 1160, "bottom": 700, "center_x": 720, "center_y": 490 }, "rotation": 0, "layer_order": 130, "opacity": 1, "visible": true, "locked": false, "constraints": { "x": "left", "y": "top" }, "states": { "normal": true }, "text": { "content": "Account | Status | Owner | Updated\nAcme Co | Active | Maria | Today\nNorthwind | Review | Lucas | Yesterday\nUmbrella | Paused | Ana | Monday", "font_family": "system-ui", "font_size": 14, "font_weight": "500", "font_color": "#111517", "text_align": "left" }, "shape": { "variant": "table", "style": { "background": "#ffffff" } } }
+  ],
+  "interactions": [],
+  "components": [],
+  "timeline": { "active": false },
+  "warnings": []
+}

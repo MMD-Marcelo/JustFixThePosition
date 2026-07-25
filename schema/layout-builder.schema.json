@@ -1,0 +1,363 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://just-fix-the-position.dev/schema/layout-builder.schema.json",
+  "title": "JUST fix the position JSON",
+  "type": "object",
+  "required": ["schema_version", "app", "canvas", "elements", "timeline"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "app": { "const": "just-fix-the-position" },
+    "_instructions_for_llm": { "type": "string" },
+    "llm_brief": { "$ref": "#/$defs/llm_brief" },
+    "exported_at": { "type": "string", "format": "date-time" },
+    "export": { "$ref": "#/$defs/export_info" },
+    "canvas": { "$ref": "#/$defs/canvas" },
+    "assets": { "type": "array", "items": { "$ref": "#/$defs/asset" } },
+    "elements": { "type": "array", "items": { "$ref": "#/$defs/element" } },
+    "interactions": { "type": "array", "items": { "$ref": "#/$defs/interaction" } },
+    "components": { "type": "array", "items": { "type": "object" } },
+    "timeline": { "$ref": "#/$defs/timeline" },
+    "warnings": { "type": "array", "items": { "$ref": "#/$defs/warning" } }
+  },
+  "$defs": {
+    "export_info": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "type": { "enum": ["screen", "element"] },
+        "name": { "type": "string" },
+        "profile": { "type": "string" },
+        "interface_language": { "enum": ["pt", "en"] }
+      }
+    },
+    "canvas": {
+      "type": "object",
+      "required": ["width", "height", "total_height"],
+      "additionalProperties": true,
+      "properties": {
+        "type": { "type": "string" },
+        "width": { "type": "number", "minimum": 1 },
+        "height": { "type": "number", "minimum": 1 },
+        "total_height": { "type": "number", "minimum": 1 },
+        "screens": { "type": "array", "items": { "$ref": "#/$defs/screen" } },
+        "guides": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "h": { "type": "array", "items": { "type": "number" } },
+            "v": { "type": "array", "items": { "type": "number" } }
+          }
+        },
+        "color_vars": { "type": "array", "items": { "$ref": "#/$defs/color_var" } }
+      }
+    },
+    "screen": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": ["string", "number"] },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "w": { "type": "number" },
+        "h": { "type": "number" }
+      }
+    },
+    "color_var": {
+      "type": "object",
+      "required": ["name", "value"],
+      "additionalProperties": true,
+      "properties": {
+        "name": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "required": ["id", "file", "type"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "file": { "type": "string" },
+        "type": { "type": "string" },
+        "source": { "type": ["string", "null"] }
+      }
+    },
+    "element": {
+      "type": "object",
+      "required": ["id", "name", "type", "position", "size", "layer_order"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "asset_id": { "type": "string" },
+        "file": { "type": "string" },
+        "semantic_role": { "type": "string" },
+        "component_name": { "type": "string" },
+        "position": { "$ref": "#/$defs/position" },
+        "size": { "$ref": "#/$defs/size" },
+        "bounds": { "$ref": "#/$defs/bounds" },
+        "constraints": { "$ref": "#/$defs/constraints" },
+        "states": { "$ref": "#/$defs/states" },
+        "rotation": { "type": "number" },
+        "layer_order": { "type": "number" },
+        "opacity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "visible": { "type": "boolean" },
+        "locked": { "type": "boolean" },
+        "crop": { "$ref": "#/$defs/crop" },
+        "group_name": { "type": "string" },
+        "description": { "type": "string" },
+        "comments": { "type": "array", "items": { "$ref": "#/$defs/comment" } },
+        "text": { "$ref": "#/$defs/text" },
+        "shape": { "$ref": "#/$defs/shape" },
+        "brush": { "$ref": "#/$defs/brush" },
+        "timeline": { "$ref": "#/$defs/element_timeline" },
+        "keyframes": { "type": "array", "items": { "$ref": "#/$defs/keyframe" } },
+        "tracking": { "$ref": "#/$defs/tracking" }
+      }
+    },
+    "position": {
+      "type": "object",
+      "required": ["x", "y"],
+      "additionalProperties": true,
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "x_pct": { "type": "number" },
+        "y_pct": { "type": "number" }
+      }
+    },
+    "size": {
+      "type": "object",
+      "required": ["width", "height"],
+      "additionalProperties": true,
+      "properties": {
+        "width": { "type": "number", "minimum": 0 },
+        "height": { "type": "number", "minimum": 0 },
+        "w_pct": { "type": "number" },
+        "h_pct": { "type": "number" }
+      }
+    },
+    "bounds": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "left": { "type": "number" },
+        "top": { "type": "number" },
+        "right": { "type": "number" },
+        "bottom": { "type": "number" },
+        "center_x": { "type": "number" },
+        "center_y": { "type": "number" }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "x": { "type": "string" },
+        "y": { "type": "string" },
+        "horizontal": { "type": "string" },
+        "vertical": { "type": "string" }
+      }
+    },
+    "states": {
+      "type": "object",
+      "additionalProperties": { "type": "boolean" },
+      "properties": {
+        "normal": { "type": "boolean" },
+        "hover": { "type": "boolean" },
+        "active": { "type": "boolean" },
+        "disabled": { "type": "boolean" },
+        "loading": { "type": "boolean" },
+        "error": { "type": "boolean" }
+      }
+    },
+    "comment": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "type": { "type": "string" },
+        "text": { "type": "string" }
+      }
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "content": { "type": "string" },
+        "font_family": { "type": "string" },
+        "font_size": { "type": "number" },
+        "font_weight": { "type": ["string", "number"] },
+        "font_color": { "type": "string" },
+        "text_align": { "type": "string" },
+        "color_var": { "type": "string" }
+      }
+    },
+    "shape": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "variant": { "type": "string" },
+        "style": { "type": "object" }
+      }
+    },
+    "brush": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "strokes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "tool": { "type": "string" },
+              "color": { "type": "string" },
+              "size": { "type": "number" },
+              "soft": { "type": "boolean" },
+              "erase": { "type": "boolean" },
+              "points": { "type": "array", "items": { "$ref": "#/$defs/point" } }
+            }
+          }
+        }
+      }
+    },
+    "point": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" }
+      }
+    },
+    "crop": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "cutouts": { "type": "array", "items": { "$ref": "#/$defs/rect" } },
+        "pasted_fragments": { "type": "array", "items": { "type": "object" } },
+        "fragment": { "type": "object" }
+      }
+    },
+    "rect": {
+      "type": "object",
+      "required": ["x", "y", "w", "h"],
+      "properties": {
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "w": { "type": "number" },
+        "h": { "type": "number" }
+      }
+    },
+    "element_timeline": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "perpetual": { "type": "boolean" },
+        "frame_in": { "type": ["number", "null"] },
+        "frame_out": { "type": ["number", "null"] },
+        "duration_seconds": { "type": ["number", "null"] },
+        "gif_mode": { "type": "string" }
+      }
+    },
+    "keyframe": {
+      "type": "object",
+      "required": ["frame"],
+      "additionalProperties": true,
+      "properties": {
+        "frame": { "type": "number" },
+        "time_seconds": { "type": "number" },
+        "x": { "type": "number" },
+        "y": { "type": "number" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "rotation": { "type": "number" },
+        "ease": { "type": "string" }
+      }
+    },
+    "interaction": {
+      "type": "object",
+      "required": ["element_id", "event"],
+      "additionalProperties": true,
+      "properties": {
+        "element_id": { "type": "string" },
+        "event": { "type": "string" },
+        "description": { "type": "string" },
+        "swap_with": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "element_id": { "type": "string" },
+            "name": { "type": "string" },
+            "file": { "type": "string" },
+            "type": { "type": "string" }
+          }
+        }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "required": ["active"],
+      "additionalProperties": true,
+      "properties": {
+        "active": { "type": "boolean" },
+        "total_frames": { "type": "number" },
+        "fps": { "type": "number" },
+        "duration_seconds": { "type": "number" },
+        "loop": { "type": "boolean" },
+        "auto_keyframe": { "type": "boolean" }
+      }
+    },
+    "tracking": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "identity": { "type": "object" },
+        "layout": { "type": "object" },
+        "state": { "type": "object" },
+        "content": { "type": "object" },
+        "behavior": { "type": "object" },
+        "relationships": { "type": "object" },
+        "raw": { "type": "object" }
+      }
+    },
+    "llm_brief": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "goal": { "type": "string" },
+        "project_name": { "type": "string" },
+        "export_mode": { "type": "string" },
+        "target_profile": { "type": "string" },
+        "implementation_priority": { "type": "array", "items": { "type": "string" } },
+        "coordinate_system": { "type": "object" },
+        "screen_summary": { "type": "string" },
+        "layout_rules": { "type": "array", "items": { "type": "string" } },
+        "visual_hierarchy": { "type": "array", "items": { "type": "object" } },
+        "component_plan": { "type": "array", "items": { "type": "object" } },
+        "asset_instructions": { "type": "array", "items": { "type": "object" } },
+        "interaction_summary": { "type": "array", "items": { "type": "object" } },
+        "timeline_summary": { "type": "array", "items": { "type": "object" } },
+        "states_summary": { "type": "array", "items": { "type": "object" } },
+        "ambiguities": { "type": "array", "items": { "type": "string" } },
+        "final_instruction": { "type": "string" }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "severity": { "type": "string" },
+        "element_id": { "type": "string" },
+        "element_name": { "type": "string" },
+        "type": { "type": "string" },
+        "message": { "type": "string" },
+        "fix": { "type": "string" }
+      }
+    }
+  }
+}

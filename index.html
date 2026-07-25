@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>JUST fix the position</title>
+<link rel="icon" type="image/png" href="ico.png">
+<link rel="stylesheet" href="styles/00-base-topbar.css">
+<link rel="stylesheet" href="styles/01-layout-panels.css">
+<link rel="stylesheet" href="styles/02-canvas-elements.css">
+<link rel="stylesheet" href="styles/03-inspector-timeline-modal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+</head>
+<body>
+
+<div id="tabs-bar">
+  <div id="brand-lockup"><img src="logo.png" alt="JUST fix the position"></div>
+  <div id="tabs-container"></div>
+  <div id="tab-new" onclick="addTab()" title="Novo projeto">+</div>
+  <div id="autosave-status">salvo</div>
+</div>
+
+<div id="topbar">
+  <button class="btn on" id="btn-desktop" onclick="setScreen('desktop')">Desktop</button>
+  <button class="btn" id="btn-mobile" onclick="setScreen('mobile')">Mobile</button>
+  <button class="btn" id="btn-custom" onclick="openCustomSize()" data-i18n="custom">Personalizado</button>
+  <div class="sep"></div>
+  <button class="btn" onclick="openCommandPalette()" title="Paleta de comandos (Ctrl+K)" data-i18n-title="command_palette_tip">Cmd</button>
+  <button class="btn" onclick="togglePreviewMode()" title="Preview sem painéis (P)" data-i18n-title="preview_tip">Preview</button>
+  <button class="btn" onclick="openHistoryPanel()" title="Histórico visual" data-i18n="history" data-i18n-title="history_tip">Histórico</button>
+  <div class="sep"></div>
+  <button class="btn" onclick="triggerImport()" title="Importar imagens, SVG, GIF ou OBJ">+ Importar</button>
+  <input type="file" id="fi" accept="image/*,.obj,.svg,.gif" multiple style="display:none" onchange="importFiles(event)">
+  <button class="btn" onclick="triggerFontImport()" title="Importar fonte TTF/OTF/WOFF">+ Fonte</button>
+  <input type="file" id="fi-font" accept=".ttf,.otf,.woff,.woff2" multiple style="display:none" onchange="importFonts(event)">
+  <div class="sep"></div>
+  <button class="btn" id="btn-grid" onclick="toggleGrid()">Grid</button>
+  <button class="btn" id="btn-snap" onclick="toggleSnap()">Snap</button>
+  <button class="btn" id="btn-rulers" onclick="toggleRulers()" title="Mostrar réguas e criar guias" data-i18n="rulers" data-i18n-title="rulers_tip">Réguas</button>
+  <button class="btn" id="btn-mm" onclick="toggleMinimap()">Minimap</button>
+  <div class="sep"></div>
+  <button class="btn" onclick="undo()" title="Desfazer (Ctrl+Z)" data-i18n="undo">Desfazer</button>
+  <button class="btn" onclick="redo()" title="Refazer (Ctrl+Y)" data-i18n="redo">Refazer</button>
+  <div class="sep"></div>
+  <span id="zoom-lbl">75%</span>
+  <button class="btn" onclick="zs(-10)">-</button>
+  <button class="btn" onclick="zs(+10)">+</button>
+  <button class="btn" onclick="fitCanvas()" data-i18n="fit">Ajustar</button>
+  <div class="sep"></div>
+  <button class="btn" onclick="addScreen()">+ Tela</button>
+  <button class="btn" onclick="duplicateScreen()" title="Duplicar tela atual" data-i18n="duplicate_screen_short" data-i18n-title="duplicate_screen_tip">Dup Tela</button>
+  <button class="btn" onclick="openTemplateModal()">Templates</button>
+  <button class="btn red-h" onclick="clearAll()">Limpar</button>
+  <button class="btn" onclick="saveProject()">Salvar Projeto</button>
+  <button class="btn" onclick="triggerLoadProject()">Importar Projeto</button>
+  <input type="file" id="fi-proj" webkitdirectory style="display:none" onchange="loadProjectFolder(event)">
+  <button class="btn" onclick="triggerLoadJSON()">Importar JSON</button>
+  <input type="file" id="fi-json" accept=".json" style="display:none" onchange="loadLayoutJSON(event)">
+  <button class="btn" onclick="openExportModal()">Exportar JSON</button>
+  <button class="btn" id="btn-lang" onclick="toggleLang()" title="Trocar idioma" data-i18n-title="language_tip">PT</button>
+  <span id="sz">1920 x 1080</span>
+</div>
+
+<div id="main">
+  <div id="left">
+    <div class="ps"><div class="pt"><span data-i18n="screens">Telas</span> <span class="ptb" onclick="addScreen()">+</span></div><div id="screens-list"></div></div>
+    <div class="ps"><div class="pt"><span data-i18n="guides">Guias</span> <span class="ptb r" onclick="clearGuides()" title="Limpar guias" data-i18n-title="clear_guides">x</span></div><div id="guides-list"></div></div>
+    <div class="ps"><div class="pt" data-i18n="search_layers">Buscar Camadas</div><input id="layer-search" class="side-input" placeholder="nome, tipo, grupo" data-i18n-placeholder="layer_search_ph" oninput="updateLayers()"></div>
+    <div class="ps grow"><div class="pt"><span data-i18n="layers">Camadas</span> <span class="ptb" onclick="groupSel()" title="Agrupar selecionados" data-i18n-title="group_selected">G</span></div><div id="layers-list"></div></div>
+    <div class="ps"><div class="pt">Assets</div><div id="assets-list"></div></div>
+    <div class="ps basic-components-panel"><div class="pt"><span data-i18n="basic_components">Componentes Básicos</span><span><span class="ptb" onclick="saveComponentFromSelection()" title="Salvar seleção como componente">+</span><span class="ptb" onclick="openComponentsPanel()" title="Componentes salvos" style="margin-left:6px">□</span></span></div><input id="basic-component-search" class="side-input" placeholder="buscar componente" oninput="renderBasicComponents()"><div id="basic-components-list"></div></div>
+    <div class="ps"><div class="pt" data-i18n="color_vars">Variáveis de Cor</div>
+      <div id="vars-area">
+        <div id="vars-list" style="display:flex;flex-wrap:wrap;gap:2px;margin-bottom:4px"></div>
+        <div class="crow">
+          <input type="color" id="vpick" value="#ffffff">
+          <input type="text" id="vname" placeholder="nome">
+          <button class="btn" style="padding:2px 5px;font-size:9px" onclick="addVar()">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toolrail">
+    <button class="rail-btn on" id="tool-sel" onclick="setTool('sel')" title="Selecionar (V)"><i class="ph ph-cursor"></i></button>
+    <button class="rail-btn" id="tool-txt" onclick="setTool('txt')" title="Texto (T)"><i class="ph ph-text-t"></i></button>
+    <button class="rail-btn" id="tool-note" onclick="setTool('note')" title="Nota (N)"><i class="ph ph-note-pencil"></i></button>
+    <button class="rail-btn" id="tool-brush" onclick="setTool('brush')" oncontextmenu="openBrushToolMenu(event,'brush')" title="Brush (B)"><i class="ph ph-paint-brush"></i></button>
+    <button class="rail-btn" id="tool-brush-soft" onclick="setTool('brush-soft')" oncontextmenu="openBrushToolMenu(event,'brush-soft')" title="Brush soft"><i class="ph ph-paint-brush-broad"></i></button>
+    <button class="rail-btn" id="tool-eraser" onclick="setTool('eraser')" oncontextmenu="openBrushToolMenu(event,'eraser')" title="Borracha"><i class="ph ph-eraser"></i></button>
+    <button class="rail-btn" id="tool-crop" onclick="setTool('crop')" title="Recortar"><i class="ph ph-crop"></i></button>
+    <input id="brush-color" type="color" value="#111111" title="Cor do brush">
+    <input id="brush-size" type="range" min="1" max="48" value="6" title="Tamanho do brush">
+  </div>
+
+  <div id="canvas-area">
+    <div id="camera-spacer"></div>
+    <div id="ruler-h"></div>
+    <div id="ruler-v"></div>
+    <div id="cwrap"><div id="canvas">
+      <div id="grid-div"></div>
+      <div id="marquee"></div>
+      <div class="drophint"><span style="font-size:22px;opacity:.2">[ ]</span><span data-i18n="drop_hint">Arraste imagens, SVG, GIF ou OBJ</span></div>
+    </div></div>
+  </div>
+
+  <div id="right">
+    <div id="nosel" class="nosel"><span data-i18n="select_element">Selecione um elemento</span><br><span data-i18n="to_edit">para editar</span></div>
+
+    <div id="multi-props" style="display:none">
+      <div class="pg">
+        <div class="plbl" data-i18n="multi_select">Multisseleção</div>
+        <div class="abrow">
+          <button class="ab" onclick="distributeSel('x')">Dist H</button>
+          <button class="ab" onclick="distributeSel('y')">Dist V</button>
+          <button class="ab" onclick="equalizeSel('w')">Igual W</button>
+          <button class="ab" onclick="equalizeSel('h')">Igual H</button>
+          <button class="ab" onclick="equalizeSel('both')">Igual Ambos</button>
+        </div>
+        <div class="ow" style="margin-top:6px"><input type="range" id="mopac" min="0" max="100" value="100" oninput="upMultiOpac()"><span class="oval" id="mopv">100%</span></div>
+        <select class="psel" id="msemantic" onchange="upMultiSemantic()"><option value="" data-i18n="semantic_ph">semântica...</option><option>button</option><option>input</option><option>card</option><option>nav</option><option>modal</option><option>hero</option><option>chart</option><option>table</option><option>media</option></select>
+      </div>
+    </div>
+
+    <div id="props" style="display:none">
+      <div class="pg">
+        <div class="plbl" data-i18n="position_size">Posição e Tamanho</div>
+        <div class="prow"><span class="pk">X</span><input class="pi" id="px" type="number" oninput="upP('x')"><span class="pk">Y</span><input class="pi" id="py" type="number" oninput="upP('y')"></div>
+        <div class="prow"><span class="pk">W</span><input class="pi" id="pw" type="number" oninput="upP('w')"><span class="pk">H</span><input class="pi" id="ph" type="number" oninput="upP('h')"></div>
+        <div class="prow"><span class="pk">Z</span><input class="pi" id="pz" type="number" min="1" oninput="upP('z')" style="max-width:44px"><span class="pk" style="width:20px">deg</span><input class="pi" id="prot" type="number" oninput="upP('rot')" style="max-width:50px"></div>
+      </div>
+
+      <div class="pg">
+        <div class="plbl">Opacidade</div>
+        <div class="ow"><input type="range" id="popac" min="0" max="100" value="100" oninput="upOpac()"><span class="oval" id="ov">100%</span></div>
+      </div>
+
+      <div class="pg">
+        <div class="plbl" data-i18n="semantic_responsive">Semântica e Responsivo</div>
+        <div class="phelp" data-i18n="semantic_help">Semântica diz o que o elemento é para a IA. Responsivo define como ele ancora quando a tela muda.</div>
+        <select class="psel" id="psemantic" onchange="upMeta()"><option value="" data-i18n="semantic_ph">semântica...</option><option>button</option><option>input</option><option>card</option><option>nav</option><option>modal</option><option>hero</option><option>chart</option><option>table</option><option>media</option><option>icon</option><option>text</option></select>
+        <div class="prow" style="margin-top:5px">
+          <select class="psel" id="pcx" onchange="upMeta()" style="margin-top:0;flex:1"><option value="left">left</option><option value="center">center</option><option value="right">right</option><option value="stretch">stretch</option></select>
+          <select class="psel" id="pcy" onchange="upMeta()" style="margin-top:0;flex:1"><option value="top">top</option><option value="center">center</option><option value="bottom">bottom</option><option value="stretch">stretch</option></select>
+        </div>
+        <input class="pi" id="pcomponent" placeholder="component name" oninput="upMeta()" style="width:100%;margin-top:5px">
+      </div>
+
+      <div class="pg">
+        <div class="plbl">Estados</div>
+        <div class="state-grid">
+          <label class="tr"><input type="checkbox" id="st-normal" onchange="upStates()"> normal</label>
+          <label class="tr"><input type="checkbox" id="st-hover" onchange="upStates()"> hover</label>
+          <label class="tr"><input type="checkbox" id="st-active" onchange="upStates()"> active</label>
+          <label class="tr"><input type="checkbox" id="st-disabled" onchange="upStates()"> disabled</label>
+          <label class="tr"><input type="checkbox" id="st-loading" onchange="upStates()"> loading</label>
+          <label class="tr"><input type="checkbox" id="st-error" onchange="upStates()"> error</label>
+        </div>
+      </div>
+
+      <div class="pg" id="kfpg" style="display:none">
+        <div class="plbl" style="display:flex;align-items:center;justify-content:space-between">
+          <span>Keyframe - Frame <span id="kff" style="color:var(--a4)">0</span></span>
+          <span id="kf-cur-ind" style="font-size:9px;color:var(--a4);display:none">KF aqui</span>
+        </div>
+        <div class="kfrow">
+          <button class="kfbtn" id="kfb-pos" onclick="saveKF('pos')" data-i18n="position">Posição</button>
+          <button class="kfbtn" id="kfb-size" onclick="saveKF('size')">Tamanho</button>
+          <button class="kfbtn" id="kfb-rot" onclick="saveKF('rot')" data-i18n="rotation">Rotação</button>
+          <button class="kfbtn" id="kfb-all" onclick="saveKF('all')">Todos</button>
+        </div>
+        <select class="psel" id="kfease" onchange="upKFEase()" title="Easing do keyframe no frame atual">
+          <option value="linear">linear</option>
+          <option value="ease-in">ease-in</option>
+          <option value="ease-out">ease-out</option>
+          <option value="ease-in-out">ease-in-out</option>
+        </select>
+      </div>
+
+      <div class="pg" id="tprops">
+        <div class="plbl">Texto</div>
+        <textarea class="pta" id="ptxt" oninput="upTxt()"></textarea>
+        <div class="prow" style="margin-top:4px">
+          <span class="pk" style="width:22px">Font</span>
+          <select class="psel" id="pfont" onchange="upTxt()" style="margin-top:0;flex:1"><option>system-ui</option><option>serif</option><option>monospace</option><option>Arial</option><option>Georgia</option><option>Verdana</option></select>
+        </div>
+        <div class="prow"><span class="pk" style="width:22px">Tam</span><input class="pi" id="ptsize" type="number" value="16" min="6" oninput="upTxt()"><input type="color" id="ptcolor" value="#111111" onchange="upTxt()" style="width:24px;height:22px;border:1px solid var(--border2);border-radius:0;background:transparent;padding:1px;cursor:pointer;"></div>
+        <div class="prow">
+          <span class="pk" style="width:22px">Peso</span>
+          <select class="psel" id="ptweight" onchange="upTxt()" style="margin-top:0;flex:1"><option value="400">Normal</option><option value="600">Semibold</option><option value="700">Bold</option></select>
+          <select class="psel" id="ptalign" onchange="upTxt()" style="margin-top:0;flex:1"><option value="left">Left</option><option value="center">Center</option><option value="right">Right</option></select>
+        </div>
+        <div style="margin-top:3px"><select class="psel" id="ptvar" onchange="bindVar()" style="margin-top:0;font-size:9px"></select></div>
+      </div>
+
+      <div class="pg">
+        <div class="plbl">Alinhar</div>
+        <div class="abrow">
+          <button class="ab" onclick="alignEl('left')" title="Alinhar esquerda">L</button><button class="ab" onclick="alignEl('cx')" title="Centralizar horizontal">CH</button>
+          <button class="ab" onclick="alignEl('right')" title="Alinhar direita">R</button><button class="ab" onclick="alignEl('top')" title="Alinhar topo">T</button>
+          <button class="ab" onclick="alignEl('cy')" title="Centralizar vertical">CV</button><button class="ab" onclick="alignEl('bot')" title="Alinhar base">B</button>
+          <button class="ab" onclick="alignEl('center')" title="Centralizar">C</button>
+        </div>
+        <select class="psel" id="aref" style="margin-top:5px"><option value="">ref object</option></select>
+        <div class="abrow" style="margin-top:3px"><button class="ab" onclick="alignRef('cx')">Ref H</button><button class="ab" onclick="alignRef('cy')">Ref V</button><button class="ab" onclick="alignRef('c')">Ref C</button></div>
+      </div>
+
+      <div class="pg"><div class="plbl">Identificador</div><input class="pi" id="pname" type="text" oninput="upName()" style="width:100%"><select class="psel" id="pgroup" onchange="upGroup()"><option value="">Sem grupo</option></select></div>
+      <div class="pg"><div class="plbl" data-i18n="description_comment">Descrição / Comentário</div><textarea class="pta" id="pdesc" oninput="upDesc()"></textarea></div>
+
+      <div class="pg" id="tlpg" style="display:none">
+        <div class="plbl">Timeline</div>
+        <label class="tr"><input type="checkbox" id="pperp" onchange="upTl()"> <span data-i18n="perpetual">Perpétuo</span></label>
+        <label class="tr"><input type="checkbox" id="tlautokf" onchange="upTimelinePrefs()"> <span data-i18n="auto_keyframe">Keyframe automático</span></label>
+        <div id="tltiming">
+          <div class="prow"><span style="font-size:9px;color:var(--muted);width:32px;flex-shrink:0">Entra</span><input class="pi" id="pfin" type="number" min="0" oninput="upTl()"><span style="font-size:9px;color:var(--muted);width:24px;text-align:center">Sai</span><input class="pi" id="pfout" type="number" min="0" oninput="upTl()"></div>
+          <div id="gifrow" style="display:none;margin-top:3px"><select class="psel" id="pgifmode" onchange="upTl()" style="margin-top:0"><option value="loop">Loop</option><option value="once-hide">Uma vez e sumir</option><option value="once-last">Uma vez e parar</option></select></div>
+        </div>
+      </div>
+
+      <div class="pg">
+        <div class="plbl" data-i18n="actions">Ações</div>
+        <label class="tr"><input type="checkbox" id="hclick" onchange="togColl('cclick','hclick')"> Ao Clicar</label>
+        <div class="coll" id="cclick"><textarea class="pta" id="pclick" oninput="upAct()" style="min-height:36px" placeholder="O que acontece..."></textarea><label class="tr" style="margin-top:4px"><input type="checkbox" id="hcswap" onchange="togColl('ccswap','hcswap');upAct()"> Substituir por</label><div class="coll" id="ccswap"><select class="psel" id="cswap" onchange="upAct()" style="margin-top:0"></select></div></div>
+        <div class="isep"></div>
+        <label class="tr"><input type="checkbox" id="hhover" onchange="togColl('chover','hhover')"> Ao Passar Mouse</label>
+        <div class="coll" id="chover"><textarea class="pta" id="phover" oninput="upAct()" style="min-height:36px" placeholder="O que acontece..."></textarea><label class="tr" style="margin-top:4px"><input type="checkbox" id="hhswap" onchange="togColl('chswap','hhswap');upAct()"> Substituir por</label><div class="coll" id="chswap"><select class="psel" id="hswap" onchange="upAct()" style="margin-top:0"></select></div></div>
+      </div>
+    </div>
+    <div id="minimap"><canvas id="mmcanvas"></canvas><div id="mmvp"></div></div>
+  </div>
+</div>
+
+<div id="tlwrap">
+  <div id="tltoggle" onclick="toggleTl()"><span id="tlicon">+</span><span>Timeline</span><span id="tlstatus">desativada</span></div>
+  <div id="tl">
+    <div id="tltop">
+      <button class="tlbtn" onclick="tlSeek(0)" title="Ir para o inicio">|&lt;</button>
+      <button class="tlbtn" onclick="tlPrevKF()" title="Keyframe anterior">KF&lt;</button>
+      <button class="tlbtn" id="tlplay" onclick="tlTogglePlay()" title="Play/Pause">Play</button>
+      <button class="tlbtn" onclick="tlNextKF()" title="Proximo keyframe">KF&gt;</button>
+      <div class="tlsep"></div>
+      <span id="tlfd" style="font-family:var(--mono);font-size:10px;color:var(--muted);min-width:38px">F 0</span>
+      <div class="tlsep"></div>
+      <span class="tllbl">FPS</span><input class="tlnum" id="tlfps" type="number" value="24" min="1" max="120" onchange="upTlFPS()">
+      <span class="tllbl">Frames</span><input class="tlnum" id="tltotal" type="number" value="120" min="1" max="9999" onchange="upTlTotal()">
+      <span id="tldur" class="tllbl">5.00s</span>
+      <span class="tllbl">Zoom</span><input class="tlnum" id="tlzoom" type="number" value="11" min="4" max="40" onchange="upTlZoom()">
+      <div class="tlsep"></div>
+      <label class="tlchk"><input type="checkbox" id="tlloop" checked> Loop</label>
+      <div class="tlsep"></div>
+      <label class="tlchk"><input type="checkbox" id="tlonion" onchange="renderOnion()"> Onion</label>
+      <div class="tlsep"></div>
+      <label class="tlchk"><input type="checkbox" id="tlinterp" checked> Interpolar KF</label>
+    </div>
+    <div id="tlbody"><div id="tllabels"></div><div id="tlscroll"><div id="tlinner"><div id="tlruler"></div></div></div></div>
+  </div>
+</div>
+
+<div id="ctx">
+  <div class="ci" onclick="ctxDup()">Duplicar</div>
+  <div class="ci" onclick="ctxGroup()">Agrupar selecionados</div>
+  <div class="csep"></div>
+  <div class="ci" onclick="ctxReplaceExisting()">Substituir por elemento...</div>
+  <div class="ci" onclick="ctxReplaceUpload()">Upload substituto...</div>
+  <div class="csep"></div>
+  <div class="ci" onclick="ctxLock()">Bloquear / Desbloquear</div>
+  <div class="ci" onclick="ctxFront()">Trazer para frente</div>
+  <div class="ci" onclick="ctxBack()">Enviar para tras</div>
+  <div class="csep"></div>
+  <div class="ci red" onclick="ctxDel()">Deletar</div>
+</div>
+<div id="toolctx">
+  <div class="ci" onclick="ctxBrushNewLayer()">Criar nova layer ao desenhar</div>
+</div>
+<input type="file" id="fi-replace" accept="image/*,.obj,.svg,.gif" style="display:none" onchange="replaceTargetWithUpload(event)">
+
+<div id="mov"><div id="modal">
+  <h3 id="mtitle"></h3><div id="mbody"></div>
+  <div class="mrow"><button class="mbtn" onclick="closeM()">Cancelar</button><button class="mbtn ok" onclick="okM()">OK</button></div>
+</div></div>
+<div id="toast"></div>
+<button id="preview-exit" type="button" onclick="togglePreviewMode()" title="Sair do preview">Sair do Preview</button>
+
+<script src="src/01-core.js"></script>
+<script src="src/02-canvas.js"></script>
+<script src="src/03-assets-components-templates.js"></script>
+<script src="src/04-render-selection-mouse.js"></script>
+<script src="src/05-editing-layers-inspector.js"></script>
+<script src="src/06-timeline-persistence.js"></script>
+<script src="src/07-export-modal-utils.js"></script>
+<script src="src/08-init.js"></script>
+</body>
+</html>

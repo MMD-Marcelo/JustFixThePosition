@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "app": "just-fix-the-position",
+  "_instructions_for_llm": "Use este JSON como contrato visual. Preserve coordenadas, hierarquia, layers, textos, estados e componentes.",
+  "llm_brief": {
+    "goal": "Recriar uma landing page desktop com navbar, hero, CTA e área visual.",
+    "project_name": "Landing Hero Fixture",
+    "export_mode": "screen",
+    "target_profile": "react",
+    "implementation_priority": [
+      "Preserve position.x/y, size.width/height, bounds, opacity and layer_order.",
+      "Use semantic_role and component_name to build real semantic components.",
+      "Do not redesign the hero composition."
+    ],
+    "coordinate_system": {
+      "origin": "top-left",
+      "unit": "px",
+      "canvas_width": 1440,
+      "canvas_height": 900,
+      "total_height": 900,
+      "z_order": "Higher layer_order renders above lower layer_order."
+    },
+    "screen_summary": "Desktop landing page 1440x900 with top navigation, left hero copy, CTA and right media placeholder.",
+    "layout_rules": [
+      "Use absolute positioning or an equivalent layout that preserves the supplied bounds.",
+      "The navbar spans the top width and should stay above hero content.",
+      "The CTA button should be implemented as a real button."
+    ],
+    "visual_hierarchy": [
+      { "level": 1, "id": "hero-title", "name": "Hero Title", "role": "heading", "component": "HeroSection", "bounds": { "left": 96, "top": 176, "right": 720, "bottom": 300 }, "layer_order": 120 },
+      { "level": 2, "id": "hero-cta", "name": "Primary CTA", "role": "button", "component": "HeroSection", "bounds": { "left": 96, "top": 408, "right": 256, "bottom": 456 }, "layer_order": 122 },
+      { "level": 3, "id": "hero-media", "name": "Product Preview", "role": "media", "component": "HeroSection", "bounds": { "left": 820, "top": 150, "right": 1288, "bottom": 526 }, "layer_order": 110 }
+    ],
+    "component_plan": [
+      { "name": "TopNav", "source": "component_name", "element_ids": ["nav"], "element_names": ["Top Navigation"], "suggested_output": "Create a header/nav component." },
+      { "name": "HeroSection", "source": "component_name", "element_ids": ["hero-title", "hero-copy", "hero-cta", "hero-media"], "element_names": ["Hero Title", "Hero Copy", "Primary CTA", "Product Preview"], "suggested_output": "Create a hero component preserving copy, CTA and media placement." }
+    ],
+    "interaction_summary": [
+      { "element_id": "hero-cta", "event": "click", "expected_behavior": "Navigate to the signup section." }
+    ],
+    "timeline_summary": [{ "instruction": "No timeline is active; render the static layout." }],
+    "ambiguities": [],
+    "final_instruction": "Return a faithful implementation. Do not invent a different landing page structure."
+  },
+  "exported_at": "2026-07-25T00:00:00.000Z",
+  "export": { "type": "screen", "name": "Landing Hero Fixture", "profile": "react", "interface_language": "pt" },
+  "canvas": {
+    "type": "desktop",
+    "width": 1440,
+    "height": 900,
+    "total_height": 900,
+    "screens": [{ "name": "Tela 1", "type": "page", "width": 1440, "height": 900 }],
+    "guides": { "h": [96], "v": [96, 720] },
+    "color_vars": [
+      { "name": "brand-red", "value": "#ff3033" },
+      { "name": "ink", "value": "#111517" }
+    ]
+  },
+  "assets": [],
+  "elements": [
+    {
+      "id": "nav",
+      "name": "Top Navigation",
+      "type": "shape",
+      "semantic_role": "nav",
+      "component_name": "TopNav",
+      "position": { "x": 0, "y": 0 },
+      "size": { "width": 1440, "height": 72 },
+      "bounds": { "left": 0, "top": 0, "right": 1440, "bottom": 72, "center_x": 720, "center_y": 36 },
+      "rotation": 0,
+      "layer_order": 100,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "constraints": { "x": "stretch", "y": "top" },
+      "states": { "normal": true },
+      "text": { "content": "JUST | Product | Pricing | Docs | Start", "font_family": "system-ui", "font_size": 16, "font_weight": "700", "font_color": "#111517", "text_align": "left" },
+      "shape": { "variant": "nav", "style": { "background": "#ffffff" } }
+    },
+    {
+      "id": "hero-title",
+      "name": "Hero Title",
+      "type": "text",
+      "semantic_role": "heading",
+      "component_name": "HeroSection",
+      "position": { "x": 96, "y": 176 },
+      "size": { "width": 624, "height": 124 },
+      "bounds": { "left": 96, "top": 176, "right": 720, "bottom": 300, "center_x": 408, "center_y": 238 },
+      "rotation": 0,
+      "layer_order": 120,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "constraints": { "x": "left", "y": "top" },
+      "states": { "normal": true },
+      "text": { "content": "Fix visual specs before AI builds", "font_family": "system-ui", "font_size": 56, "font_weight": "800", "font_color": "#111517", "text_align": "left" }
+    },
+    {
+      "id": "hero-copy",
+      "name": "Hero Copy",
+      "type": "text",
+      "semantic_role": "text",
+      "component_name": "HeroSection",
+      "position": { "x": 96, "y": 316 },
+      "size": { "width": 560, "height": 64 },
+      "bounds": { "left": 96, "top": 316, "right": 656, "bottom": 380, "center_x": 376, "center_y": 348 },
+      "rotation": 0,
+      "layer_order": 121,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "constraints": { "x": "left", "y": "top" },
+      "states": { "normal": true },
+      "text": { "content": "Export a precise JSON contract with layout, components, interactions and timeline.", "font_family": "system-ui", "font_size": 20, "font_weight": "400", "font_color": "#455053", "text_align": "left" }
+    },
+    {
+      "id": "hero-cta",
+      "name": "Primary CTA",
+      "type": "shape",
+      "semantic_role": "button",
+      "component_name": "HeroSection",
+      "position": { "x": 96, "y": 408 },
+      "size": { "width": 160, "height": 48 },
+      "bounds": { "left": 96, "top": 408, "right": 256, "bottom": 456, "center_x": 176, "center_y": 432 },
+      "rotation": 0,
+      "layer_order": 122,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "constraints": { "x": "left", "y": "top" },
+      "states": { "normal": true, "hover": true },
+      "text": { "content": "Start now", "font_family": "system-ui", "font_size": 16, "font_weight": "700", "font_color": "#ffffff", "text_align": "center" },
+      "shape": { "variant": "button", "style": { "background": "#ff3033" } }
+    },
+    {
+      "id": "hero-media",
+      "name": "Product Preview",
+      "type": "shape",
+      "semantic_role": "media",
+      "component_name": "HeroSection",
+      "position": { "x": 820, "y": 150 },
+      "size": { "width": 468, "height": 376 },
+      "bounds": { "left": 820, "top": 150, "right": 1288, "bottom": 526, "center_x": 1054, "center_y": 338 },
+      "rotation": 0,
+      "layer_order": 110,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "constraints": { "x": "right", "y": "top" },
+      "states": { "normal": true },
+      "text": { "content": "Canvas preview", "font_family": "system-ui", "font_size": 18, "font_weight": "700", "font_color": "#6b7477", "text_align": "center" },
+      "shape": { "variant": "media", "style": { "background": "#f1f4f4" } }
+    }
+  ],
+  "interactions": [
+    { "element_id": "hero-cta", "event": "click", "description": "Navigate to the signup section." }
+  ],
+  "components": [],
+  "timeline": { "active": false },
+  "warnings": []
+}

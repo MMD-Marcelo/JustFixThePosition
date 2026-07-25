@@ -1,0 +1,734 @@
+{
+  "schema_version": "1.0",
+  "app": "just-fix-the-position",
+  "_instructions_for_llm": "Use this JSON as a visual contract. PNG assets are region-level screenshots captured from HTML/CSS mockups; rebuild them as real UI while preserving coordinates, size, layer order and semantic roles.",
+  "llm_brief": {
+    "goal": "Recreate the Landing page template with faithful layout and real UI components.",
+    "project_name": "JUST Landing page template",
+    "export_mode": "screen",
+    "target_profile": "react",
+    "implementation_priority": [
+      "Preserve coordinates, bounds, sizes and layer_order.",
+      "Use PNG assets as visual references, not as the only implementation when real UI is possible.",
+      "Respect semantic_role and component_name for component structure."
+    ],
+    "coordinate_system": {
+      "origin": "top-left",
+      "unit": "px",
+      "canvas_width": 1920,
+      "canvas_height": 1400,
+      "total_height": 1400,
+      "z_order": "Higher layer_order renders above lower layer_order."
+    },
+    "screen_summary": "Landing page template, 1920x1400, 6 visual regions.",
+    "asset_instructions": [
+      {
+        "id": "landing-page-asset-1",
+        "file": "templates/landing-page/assets/nav.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "landing-page-asset-2",
+        "file": "templates/landing-page/assets/hero.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "landing-page-asset-3",
+        "file": "templates/landing-page/assets/product-preview.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "landing-page-asset-4",
+        "file": "templates/landing-page/assets/feature-grid.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "landing-page-asset-5",
+        "file": "templates/landing-page/assets/signup-form.png",
+        "usage": "visual reference"
+      },
+      {
+        "id": "landing-page-asset-6",
+        "file": "templates/landing-page/assets/footer.png",
+        "usage": "visual reference"
+      }
+    ],
+    "timeline_summary": [
+      {
+        "instruction": "Static template. No animation timeline is required."
+      }
+    ],
+    "final_instruction": "Return production-quality responsive code that follows this JSON as the visual contract."
+  },
+  "exported_at": "2026-07-25T00:00:00.000Z",
+  "export": {
+    "type": "screen",
+    "name": "JUST Landing page template",
+    "profile": "react",
+    "interface_language": "en"
+  },
+  "canvas": {
+    "type": "desktop",
+    "width": 1920,
+    "height": 1400,
+    "total_height": 1400,
+    "screens": [
+      {
+        "id": "screen-1",
+        "name": "Landing page",
+        "type": "page",
+        "width": 1920,
+        "height": 1400
+      }
+    ],
+    "guides": {
+      "h": [],
+      "v": []
+    },
+    "color_vars": [
+      {
+        "name": "brand-red",
+        "value": "#ff3033"
+      },
+      {
+        "name": "ink",
+        "value": "#111517"
+      },
+      {
+        "name": "page-bg",
+        "value": "#f4f6f6"
+      }
+    ]
+  },
+  "assets": [
+    {
+      "id": "landing-page-asset-1",
+      "file": "templates/landing-page/assets/nav.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "landing-page-asset-2",
+      "file": "templates/landing-page/assets/hero.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "landing-page-asset-3",
+      "file": "templates/landing-page/assets/product-preview.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "landing-page-asset-4",
+      "file": "templates/landing-page/assets/feature-grid.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "landing-page-asset-5",
+      "file": "templates/landing-page/assets/signup-form.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    },
+    {
+      "id": "landing-page-asset-6",
+      "file": "templates/landing-page/assets/footer.png",
+      "type": "image/png",
+      "source": "local template screenshot"
+    }
+  ],
+  "elements": [
+    {
+      "id": "landing-page-bg",
+      "name": "Landing page background",
+      "type": "shape",
+      "semantic_role": "background",
+      "component_name": "TemplateBackground",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "x_pct": 0,
+        "y_pct": 0
+      },
+      "size": {
+        "width": 1920,
+        "height": 1400,
+        "w_pct": 100,
+        "h_pct": 100
+      },
+      "bounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1920,
+        "bottom": 1400,
+        "center_x": 960,
+        "center_y": 700
+      },
+      "constraints": {
+        "x": "left",
+        "y": "top"
+      },
+      "states": {
+        "normal": true
+      },
+      "rotation": 0,
+      "layer_order": 1,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Template background color.",
+      "shape": {
+        "variant": "background",
+        "style": {
+          "background": "#f4f6f6",
+          "border": "0"
+        }
+      },
+      "tracking": {
+        "identity": {
+          "id": "landing-page-bg",
+          "semantic_role": "background"
+        },
+        "layout": {
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "size": {
+            "width": 1920,
+            "height": 1400
+          },
+          "layer_order": 1
+        }
+      }
+    },
+    {
+      "id": "landing-page-nav",
+      "name": "Navigation header",
+      "type": "image",
+      "asset_id": "landing-page-asset-1",
+      "file": "templates/landing-page/assets/nav.png",
+      "semantic_role": "navigation",
+      "component_name": "Header",
+      "position": {
+        "x": 120,
+        "y": 40,
+        "x_pct": 6.25,
+        "y_pct": 2.86
+      },
+      "size": {
+        "width": 1680,
+        "height": 88,
+        "w_pct": 87.5,
+        "h_pct": 6.29
+      },
+      "bounds": {
+        "left": 120,
+        "top": 40,
+        "right": 1800,
+        "bottom": 128,
+        "center_x": 960,
+        "center_y": 84
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 100,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Top navigation with JUST logo, links and primary CTA.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "landing-page-nav",
+          "name": "Navigation header",
+          "type": "image",
+          "semantic_role": "navigation",
+          "component_name": "Header"
+        },
+        "layout": {
+          "position": {
+            "x": 120,
+            "y": 40
+          },
+          "size": {
+            "width": 1680,
+            "height": 88
+          },
+          "bounds": {
+            "left": 120,
+            "top": 40,
+            "right": 1800,
+            "bottom": 128,
+            "center_x": 960,
+            "center_y": 84
+          },
+          "layer_order": 100
+        },
+        "content": {
+          "asset_id": "landing-page-asset-1",
+          "file": "templates/landing-page/assets/nav.png",
+          "description": "Top navigation with JUST logo, links and primary CTA."
+        }
+      }
+    },
+    {
+      "id": "landing-page-hero",
+      "name": "Hero copy and CTA",
+      "type": "image",
+      "asset_id": "landing-page-asset-2",
+      "file": "templates/landing-page/assets/hero.png",
+      "semantic_role": "hero",
+      "component_name": "HeroSection",
+      "position": {
+        "x": 120,
+        "y": 190,
+        "x_pct": 6.25,
+        "y_pct": 13.57
+      },
+      "size": {
+        "width": 720,
+        "height": 420,
+        "w_pct": 37.5,
+        "h_pct": 30
+      },
+      "bounds": {
+        "left": 120,
+        "top": 190,
+        "right": 840,
+        "bottom": 610,
+        "center_x": 480,
+        "center_y": 400
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 101,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Hero copy, supporting text and two CTA buttons.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "landing-page-hero",
+          "name": "Hero copy and CTA",
+          "type": "image",
+          "semantic_role": "hero",
+          "component_name": "HeroSection"
+        },
+        "layout": {
+          "position": {
+            "x": 120,
+            "y": 190
+          },
+          "size": {
+            "width": 720,
+            "height": 420
+          },
+          "bounds": {
+            "left": 120,
+            "top": 190,
+            "right": 840,
+            "bottom": 610,
+            "center_x": 480,
+            "center_y": 400
+          },
+          "layer_order": 101
+        },
+        "content": {
+          "asset_id": "landing-page-asset-2",
+          "file": "templates/landing-page/assets/hero.png",
+          "description": "Hero copy, supporting text and two CTA buttons."
+        }
+      }
+    },
+    {
+      "id": "landing-page-product-preview",
+      "name": "Product preview",
+      "type": "image",
+      "asset_id": "landing-page-asset-3",
+      "file": "templates/landing-page/assets/product-preview.png",
+      "semantic_role": "product-preview",
+      "component_name": "ProductPreview",
+      "position": {
+        "x": 980,
+        "y": 170,
+        "x_pct": 51.04,
+        "y_pct": 12.14
+      },
+      "size": {
+        "width": 760,
+        "height": 520,
+        "w_pct": 39.58,
+        "h_pct": 37.14
+      },
+      "bounds": {
+        "left": 980,
+        "top": 170,
+        "right": 1740,
+        "bottom": 690,
+        "center_x": 1360,
+        "center_y": 430
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 102,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Product mockup showing canvas, JSON and prompt workflow.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "landing-page-product-preview",
+          "name": "Product preview",
+          "type": "image",
+          "semantic_role": "product-preview",
+          "component_name": "ProductPreview"
+        },
+        "layout": {
+          "position": {
+            "x": 980,
+            "y": 170
+          },
+          "size": {
+            "width": 760,
+            "height": 520
+          },
+          "bounds": {
+            "left": 980,
+            "top": 170,
+            "right": 1740,
+            "bottom": 690,
+            "center_x": 1360,
+            "center_y": 430
+          },
+          "layer_order": 102
+        },
+        "content": {
+          "asset_id": "landing-page-asset-3",
+          "file": "templates/landing-page/assets/product-preview.png",
+          "description": "Product mockup showing canvas, JSON and prompt workflow."
+        }
+      }
+    },
+    {
+      "id": "landing-page-feature-grid",
+      "name": "Feature grid",
+      "type": "image",
+      "asset_id": "landing-page-asset-4",
+      "file": "templates/landing-page/assets/feature-grid.png",
+      "semantic_role": "feature-list",
+      "component_name": "FeatureGrid",
+      "position": {
+        "x": 120,
+        "y": 760,
+        "x_pct": 6.25,
+        "y_pct": 54.29
+      },
+      "size": {
+        "width": 760,
+        "height": 260,
+        "w_pct": 39.58,
+        "h_pct": 18.57
+      },
+      "bounds": {
+        "left": 120,
+        "top": 760,
+        "right": 880,
+        "bottom": 1020,
+        "center_x": 500,
+        "center_y": 890
+      },
+      "constraints": {
+        "x": "center",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 103,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Three feature cards explaining the product value.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "landing-page-feature-grid",
+          "name": "Feature grid",
+          "type": "image",
+          "semantic_role": "feature-list",
+          "component_name": "FeatureGrid"
+        },
+        "layout": {
+          "position": {
+            "x": 120,
+            "y": 760
+          },
+          "size": {
+            "width": 760,
+            "height": 260
+          },
+          "bounds": {
+            "left": 120,
+            "top": 760,
+            "right": 880,
+            "bottom": 1020,
+            "center_x": 500,
+            "center_y": 890
+          },
+          "layer_order": 103
+        },
+        "content": {
+          "asset_id": "landing-page-asset-4",
+          "file": "templates/landing-page/assets/feature-grid.png",
+          "description": "Three feature cards explaining the product value."
+        }
+      }
+    },
+    {
+      "id": "landing-page-signup-form",
+      "name": "Signup form",
+      "type": "image",
+      "asset_id": "landing-page-asset-5",
+      "file": "templates/landing-page/assets/signup-form.png",
+      "semantic_role": "form",
+      "component_name": "SignupForm",
+      "position": {
+        "x": 1160,
+        "y": 760,
+        "x_pct": 60.42,
+        "y_pct": 54.29
+      },
+      "size": {
+        "width": 430,
+        "height": 360,
+        "w_pct": 22.4,
+        "h_pct": 25.71
+      },
+      "bounds": {
+        "left": 1160,
+        "top": 760,
+        "right": 1590,
+        "bottom": 1120,
+        "center_x": 1375,
+        "center_y": 940
+      },
+      "constraints": {
+        "x": "right",
+        "y": "top"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 104,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Lead capture form with fields and submit action.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "landing-page-signup-form",
+          "name": "Signup form",
+          "type": "image",
+          "semantic_role": "form",
+          "component_name": "SignupForm"
+        },
+        "layout": {
+          "position": {
+            "x": 1160,
+            "y": 760
+          },
+          "size": {
+            "width": 430,
+            "height": 360
+          },
+          "bounds": {
+            "left": 1160,
+            "top": 760,
+            "right": 1590,
+            "bottom": 1120,
+            "center_x": 1375,
+            "center_y": 940
+          },
+          "layer_order": 104
+        },
+        "content": {
+          "asset_id": "landing-page-asset-5",
+          "file": "templates/landing-page/assets/signup-form.png",
+          "description": "Lead capture form with fields and submit action."
+        }
+      }
+    },
+    {
+      "id": "landing-page-footer",
+      "name": "Footer",
+      "type": "image",
+      "asset_id": "landing-page-asset-6",
+      "file": "templates/landing-page/assets/footer.png",
+      "semantic_role": "footer",
+      "component_name": "Footer",
+      "position": {
+        "x": 120,
+        "y": 1240,
+        "x_pct": 6.25,
+        "y_pct": 88.57
+      },
+      "size": {
+        "width": 1680,
+        "height": 78,
+        "w_pct": 87.5,
+        "h_pct": 5.57
+      },
+      "bounds": {
+        "left": 120,
+        "top": 1240,
+        "right": 1800,
+        "bottom": 1318,
+        "center_x": 960,
+        "center_y": 1279
+      },
+      "constraints": {
+        "x": "center",
+        "y": "bottom"
+      },
+      "states": {
+        "normal": true,
+        "hover": false,
+        "active": false,
+        "disabled": false,
+        "loading": false,
+        "error": false
+      },
+      "rotation": 0,
+      "layer_order": 105,
+      "opacity": 1,
+      "visible": true,
+      "locked": false,
+      "description": "Footer with documentation and repository links.",
+      "comments": [
+        {
+          "type": "implementation",
+          "text": "This PNG is a visual target captured from a real HTML/CSS mockup. Rebuild as real UI where practical."
+        }
+      ],
+      "tracking": {
+        "identity": {
+          "id": "landing-page-footer",
+          "name": "Footer",
+          "type": "image",
+          "semantic_role": "footer",
+          "component_name": "Footer"
+        },
+        "layout": {
+          "position": {
+            "x": 120,
+            "y": 1240
+          },
+          "size": {
+            "width": 1680,
+            "height": 78
+          },
+          "bounds": {
+            "left": 120,
+            "top": 1240,
+            "right": 1800,
+            "bottom": 1318,
+            "center_x": 960,
+            "center_y": 1279
+          },
+          "layer_order": 105
+        },
+        "content": {
+          "asset_id": "landing-page-asset-6",
+          "file": "templates/landing-page/assets/footer.png",
+          "description": "Footer with documentation and repository links."
+        }
+      }
+    }
+  ],
+  "interactions": [],
+  "components": [],
+  "timeline": {
+    "active": false,
+    "total_frames": 0,
+    "fps": 24,
+    "duration_seconds": 0,
+    "loop": false,
+    "auto_keyframe": false
+  },
+  "warnings": []
+}
