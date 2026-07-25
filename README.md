@@ -1,10 +1,6 @@
-<table>
-  <tr>
-    <td bgcolor="#ffffff">
-      <img src="logo.png" alt="JUST fix the position" width="520">
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="readme-logo.png" alt="JUST fix the position" width="820">
+</p>
 
 A small visual tool I use to start interfaces faster.
 
